@@ -1,0 +1,11 @@
+# Mirrors .gitignore so secrets/DBs never land in the image.
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.db
+*.db-journal
+.pytest_cache/
+.DS_Store
+.git/

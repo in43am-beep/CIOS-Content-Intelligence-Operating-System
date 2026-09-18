@@ -1,6 +1,12 @@
-fastapi>=0.115
-uvicorn[standard]>=0.30
-pydantic>=2.7
-pydantic-settings>=2.3
-httpx>=0.27
-pytest>=8.0
+# CIOS — pinned runtime dependencies (pip-audit cleared 2026-09-18).
+fastapi==0.141.1
+uvicorn==0.53.0
+httpx==0.28.1
+pydantic==2.13.5
+pydantic-settings==2.15.0
+starlette==1.6.0
+PyJWT==2.14.0
+pwdlib==0.3.1
+argon2-cffi==25.1.0
+cryptography==50.0.1  # v2: provider key-store (Builder B) — venv me installed exact pin
+python-multipart==0.0.32  # v2: media voice-clone multipart upload (Builder B) — import-time dep

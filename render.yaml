@@ -1,0 +1,22 @@
+# CIOS — Render Blueprint ($0 free web service).
+# Secrets (OPENROUTER_API_KEY, JWT_SECRET) are set in the Render dashboard
+# (Environment -> secret entries), never committed here.
+services:
+  - type: web
+    name: cios
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: APP_HOST
+        value: 0.0.0.0
+      - key: DAILY_REQUEST_CAP
+        value: 48
+      - key: AUTH_REQUIRED
+        value: true
+      - key: OPENROUTER_API_KEY
+        sync: false # dashboard secret
+      - key: JWT_SECRET
+        sync: false # dashboard secret (long random string)
