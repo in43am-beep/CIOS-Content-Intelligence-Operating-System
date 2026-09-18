@@ -1,0 +1,57 @@
+/* CIOS Media Studio styles — matches app palette (frontend/styles.css), never edits it. */
+.ms-shell{max-width:900px;margin:0 auto;padding:26px 20px 60px;color:#e8ecf4}
+.ms-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.ms-head h2{margin:0;font-size:22px}
+.ms-headright{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ms-pill{font-size:13px;color:#fcd34d;background:#2a1f08;padding:6px 14px;border-radius:20px;border:1px solid #b45309}
+.ms-link{font-size:13px;color:#7dd3fc;text-decoration:none;border:1px solid #2a3550;border-radius:10px;padding:9px 14px;background:#1b2440}
+.ms-link:hover{background:#243052}
+.ms-back{background:#1b2440 !important;color:#c6d2ea !important;border:1px solid #2a3550 !important;border-radius:10px;padding:9px 14px !important;margin-top:0 !important;cursor:pointer;font-size:14px}
+.ms-back:hover{background:#243052 !important}
+.ms-billing{background:#2a1f08;border:1px solid #b45309;color:#fcd34d;border-radius:12px;padding:12px 16px;margin:6px 0 18px;line-height:1.7;font-size:13.5px}
+.ms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.ms-tabs button{background:#1b2440;color:#c6d2ea;border:1px solid #2a3550;padding:9px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
+.ms-tabs button:hover{background:#243052}
+.ms-tabs button.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+.ms-badge{font-size:10px;font-weight:700;background:#14532d;color:#4ade80;border-radius:8px;padding:2px 7px;margin-left:6px;vertical-align:middle}
+.ms-tab{background:#161d2e;border:1px solid #2a3550;border-radius:12px;padding:20px;margin-bottom:18px;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.ms-tab h3{margin:0 0 8px;font-size:17px;color:#c6d2ea}
+.ms-tab h4{margin:18px 0 8px;font-size:15px;color:#c6d2ea}
+.ms-tab label{display:block;margin:12px 0;font-size:14px;color:#aebad6}
+.ms-tab input,.ms-tab textarea,.ms-tab select{width:100%;margin-top:6px;padding:11px 13px;border-radius:10px;border:1px solid #2a3550;background:#0f1420;color:#e8ecf4;font-size:15px;font-family:inherit}
+.ms-tab input[type=file]{padding:9px}
+.ms-tab input[type=range]{padding:0}
+.ms-tab input[type=checkbox]{width:auto;margin:0 8px 0 0;vertical-align:middle}
+.ms-check{display:flex !important;align-items:center;gap:4px}
+.ms-tab input:focus,.ms-tab textarea:focus,.ms-tab select:focus{outline:none;border-color:#3b82f6}
+.ms-tab code{background:#0f1420;padding:2px 8px;border-radius:6px;font-size:13px;color:#7dd3fc}
+.ms-note{font-size:13px;color:#8fa0c2;margin:12px 0;line-height:1.6}
+.ms-note b{color:#fcd34d}
+.ms-meta{font-size:12px;color:#8fa0c2;margin-left:8px}
+.ms-pollstate{font-size:14px;color:#7dd3fc;margin:12px 0;min-height:20px}
+.ms-result{margin:12px 0}
+.ms-result audio,.ms-result video{width:100%;max-width:640px;border-radius:10px}
+.ms-preview{max-width:100%;border-radius:10px;border:1px solid #2a3550}
+.ms-dl{display:inline-block;margin-top:10px;color:#7dd3fc;font-size:14px}
+.ms-transcript{margin-top:10px;font-size:13px}
+.ms-transcript summary{cursor:pointer;color:#7dd3fc}
+.ms-transcript pre{white-space:pre-wrap;background:#0f1420;border:1px solid #2a3550;border-radius:8px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6}
+.ms-clonerow{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid #2a3550;border-radius:10px;padding:10px 14px;margin:8px 0;background:#0f1420;font-size:14px}
+.ms-clonerow code{font-size:12px}
+.ms-small{padding:8px 14px !important;font-size:13px !important;margin-top:0 !important}
+.ms-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.ms-table th,.ms-table td{border:1px solid #2a3550;padding:8px 10px;text-align:left;word-break:break-word}
+.ms-table th{background:#1b2440;color:#7dd3fc;font-weight:600}
+.ms-setup{background:#161d2e;border:1px solid #2a3550;border-radius:12px;padding:22px;max-width:560px}
+.ms-setup h3{margin:0 0 14px}
+.ms-setup label{display:block;margin:12px 0;font-size:14px;color:#aebad6}
+.ms-setup input{width:100%;margin-top:6px;padding:11px 13px;border-radius:10px;border:1px solid #2a3550;background:#0f1420;color:#e8ecf4;font-size:15px}
+.ms-setup .setupbox{margin-bottom:8px}
+.ms-tab .ferr,.ms-setup .ferr{color:#f87171;font-size:13px;margin:8px 0 0;min-height:0}
+.ms-tab .ferr:not(:empty),.ms-setup .ferr:not(:empty){margin-bottom:8px}
+@media (max-width:480px){
+  .ms-shell{padding:16px 12px 40px}
+  .ms-tabs{flex-wrap:nowrap;overflow-x:auto}
+  .ms-tab{padding:14px}
+}

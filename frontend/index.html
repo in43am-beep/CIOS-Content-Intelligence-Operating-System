@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIOS — Content Intelligence Operating System</title>
+<link rel="stylesheet" href="/static/styles.css">
+<!-- v2 studio shells: Builder B (media) / D (avatar) ke assets; files na hon to 404 harmless hai -->
+<link rel="stylesheet" href="/static/media-studio.css">
+<link rel="stylesheet" href="/static/avatar-studio.css">
+</head>
+<body>
+
+<!-- ============ AUTH VIEW ============ -->
+<div id="auth-view" class="authwrap" hidden>
+  <div class="authcard">
+    <h1>🧠 CIOS</h1>
+    <p class="sub">Content Intelligence Operating System — $0 edition</p>
+
+    <div class="authtabs" role="tablist" aria-label="Login ya signup">
+      <button type="button" id="authtab-login" role="tab" aria-selected="true" class="active">Login</button>
+      <button type="button" id="authtab-signup" role="tab" aria-selected="false">Signup</button>
+    </div>
+
+    <form id="login-form" novalidate>
+      <label>Email <input id="login-email" type="email" autocomplete="email" maxlength="254" placeholder="aap@email.com"></label>
+      <div class="ferr" id="login-email-err" aria-live="polite"></div>
+      <label>Password <input id="login-pass" type="password" autocomplete="current-password" maxlength="200" placeholder="••••••••"></label>
+      <div class="ferr" id="login-pass-err" aria-live="polite"></div>
+      <div class="ferr" id="login-form-err" aria-live="polite"></div>
+      <button type="submit" id="login-btn">Login karo</button>
+    </form>
+
+    <form id="signup-form" novalidate hidden>
+      <label>Email <input id="signup-email" type="email" autocomplete="email" maxlength="254" placeholder="aap@email.com"></label>
+      <div class="ferr" id="signup-email-err" aria-live="polite"></div>
+      <label>Password <input id="signup-pass" type="password" autocomplete="new-password" maxlength="200" placeholder="kam az kam 8 characters"></label>
+      <div class="ferr" id="signup-pass-err" aria-live="polite"></div>
+      <p class="note">ℹ️ Pehla signup <b>admin</b> banta hai — us ke baad admin tab se users aur quota manage hoga.</p>
+      <div class="ferr" id="signup-form-err" aria-live="polite"></div>
+      <button type="submit" id="signup-btn">Account banao</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ APP VIEW ============ -->
+<div id="app-view" hidden>
+<header>
+  <div class="brand">🧠 CIOS <span>Content Intelligence Operating System</span></div>
+  <div class="headright">
+    <button type="button" class="usage" id="usage" title="Usage refresh karo">…</button>
+    <span id="admin-badge" class="adminbadge" hidden>admin</span>
+    <button type="button" id="logout-btn" class="ghost">Logout</button>
+  </div>
+</header>
+
+<nav id="tabs" role="tablist" aria-label="Features">
+  <button type="button" data-tab="ideas" class="active" role="tab" aria-selected="true" aria-controls="tab-ideas" id="nav-ideas">💡 Ideas</button>
+  <button type="button" data-tab="research" role="tab" aria-selected="false" aria-controls="tab-research" id="nav-research">🔍 Research</button>
+  <button type="button" data-tab="scripts" role="tab" aria-selected="false" aria-controls="tab-scripts" id="nav-scripts">📝 Script</button>
+  <button type="button" data-tab="packaging" role="tab" aria-selected="false" aria-controls="tab-packaging" id="nav-packaging">🖼️ Packaging</button>
+  <button type="button" data-tab="seo" role="tab" aria-selected="false" aria-controls="tab-seo" id="nav-seo">🚀 SEO</button>
+  <button type="button" data-tab="niche" role="tab" aria-selected="false" aria-controls="tab-niche" id="nav-niche">🎯 Niche Check</button>
+  <button type="button" data-tab="history" role="tab" aria-selected="false" aria-controls="tab-history" id="nav-history">📚 History</button>
+  <button type="button" data-tab="admin" role="tab" aria-selected="false" aria-controls="tab-admin" id="nav-admin" hidden>⚙️ Admin</button>
+  <!-- v2 studios: sirf tab dikhao jab B/D ka script load ho kar window global de de (defensive) -->
+  <button type="button" id="nav-media" hidden>🎙️ Media Studio</button>
+  <button type="button" id="nav-avatar" hidden>🎭 Avatar Studio</button>
+</nav>
+
+<main>
+  <div id="key-setup" class="setupbox" hidden>
+    <b>⚠️ OpenRouter API key set nahi hai</b> — AI calls kaam nahi karengi.<br>
+    1. Free key lo: <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a> (koi card nahi chahiye)<br>
+    2. <code>.env</code> file me likho: <code>OPENROUTER_API_KEY=sk-or-...</code><br>
+    3. Server restart karo.
+  </div>
+
+  <section id="tab-ideas" class="tab active" role="tabpanel" aria-labelledby="nav-ideas">
+    <h2>Idea Generator</h2>
+    <form id="form-ideas" novalidate>
+      <label>Niche <input id="ideas-niche" autocomplete="off" maxlength="200" placeholder="misal: emotional dog stories"></label>
+      <div class="ferr" id="ideas-niche-err" aria-live="polite"></div>
+      <label>Audience <input id="ideas-audience" value="general" autocomplete="off" maxlength="200"></label>
+      <div class="ferr" id="ideas-audience-err" aria-live="polite"></div>
+      <label>Kitne ideas (3–20) <input id="ideas-count" type="number" value="10" min="3" max="20"></label>
+      <div class="ferr" id="ideas-count-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-ideas">Ideas Nikalo</button>
+        <button type="button" class="ghost" data-cancel="ideas" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-ideas" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-ideas" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-research" class="tab" role="tabpanel" aria-labelledby="nav-research">
+    <h2>Outlier Research</h2>
+    <form id="form-research" novalidate>
+      <label>Niche <input id="research-niche" autocomplete="off" maxlength="200" placeholder="misal: senior dog care"></label>
+      <div class="ferr" id="research-niche-err" aria-live="polite"></div>
+      <label>Sample videos / data (optional)<textarea id="research-examples" rows="4" maxlength="4000" placeholder="Video titles + views, ek line me ek"></textarea></label>
+      <div class="ferr" id="research-examples-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-research">Analyze Karo</button>
+        <button type="button" class="ghost" data-cancel="research" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-research" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-research" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-scripts" class="tab" role="tabpanel" aria-labelledby="nav-scripts">
+    <h2>Script Writer</h2>
+    <form id="form-scripts" novalidate>
+      <label>Topic <input id="script-topic" autocomplete="off" maxlength="300" placeholder="Video ka topic"></label>
+      <div class="ferr" id="script-topic-err" aria-live="polite"></div>
+      <label>Duration, seconds me (15–1800) <input id="script-dur" type="number" value="60" min="15" max="1800"></label>
+      <div class="ferr" id="script-dur-err" aria-live="polite"></div>
+      <label>Audience <input id="script-aud" value="general" autocomplete="off" maxlength="200"></label>
+      <div class="ferr" id="script-aud-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-scripts">Script Likho</button>
+        <button type="button" class="ghost" data-cancel="scripts" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-scripts" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-scripts" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-packaging" class="tab" role="tabpanel" aria-labelledby="nav-packaging">
+    <h2>Title + Thumbnail Pack</h2>
+    <form id="form-packaging" novalidate>
+      <label>Topic <input id="pack-topic" autocomplete="off" maxlength="300" placeholder="Video ka topic"></label>
+      <div class="ferr" id="pack-topic-err" aria-live="polite"></div>
+      <label>Audience <input id="pack-aud" value="general" autocomplete="off" maxlength="200"></label>
+      <div class="ferr" id="pack-aud-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-packaging">Pack Banao</button>
+        <button type="button" class="ghost" data-cancel="packaging" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-packaging" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-packaging" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-seo" class="tab" role="tabpanel" aria-labelledby="nav-seo">
+    <h2>SEO Pack</h2>
+    <form id="form-seo" novalidate>
+      <label>Title <input id="seo-title" autocomplete="off" maxlength="200" placeholder="Video ka final title"></label>
+      <div class="ferr" id="seo-title-err" aria-live="polite"></div>
+      <label>Topic <input id="seo-topic" autocomplete="off" maxlength="300" placeholder="Video ka topic"></label>
+      <div class="ferr" id="seo-topic-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-seo">SEO Pack Banao</button>
+        <button type="button" class="ghost" data-cancel="seo" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-seo" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-seo" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-niche" class="tab" role="tabpanel" aria-labelledby="nav-niche">
+    <h2>Niche Validator</h2>
+    <form id="form-niche" novalidate>
+      <label>Niche <input id="niche-niche" autocomplete="off" maxlength="200" placeholder="misal: AI history documentaries"></label>
+      <div class="ferr" id="niche-niche-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-niche">Validate Karo</button>
+        <button type="button" class="ghost" data-cancel="niche" hidden>Cancel</button>
+        <button type="button" class="ghost" id="print-niche" disabled title="Pehle result generate karo">🖨️ PDF / Print</button>
+      </div>
+    </form>
+    <div class="out" id="out-niche" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-history" class="tab" role="tabpanel" aria-labelledby="nav-history">
+    <h2>History</h2>
+    <button type="button" id="history-refresh">Refresh</button>
+    <div class="out" id="out-history" aria-live="polite"></div>
+  </section>
+
+  <section id="tab-admin" class="tab" role="tabpanel" aria-labelledby="nav-admin">
+    <h2>⚙️ Admin</h2>
+
+    <h3>Users</h3>
+    <button type="button" id="admin-users-btn">Users load karo</button>
+    <div class="out" id="out-admin-users" aria-live="polite"></div>
+
+    <h3>Usage (per user, per day)</h3>
+    <form id="form-admin-usage" novalidate>
+      <label>Day <input id="admin-day" type="date"></label>
+      <div class="ferr" id="admin-day-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="admin-usage-btn">Usage dekho</button>
+      </div>
+    </form>
+    <div class="out" id="out-admin-usage" aria-live="polite"></div>
+
+    <h3>Quota override</h3>
+    <form id="form-quota" novalidate>
+      <label>User ID <input id="quota-user" autocomplete="off" maxlength="10" placeholder="user ka id (users table se)"></label>
+      <div class="ferr" id="quota-user-err" aria-live="polite"></div>
+      <label>Naya daily cap <input id="quota-cap" type="number" min="1" max="10000" placeholder="misal: 48"></label>
+      <div class="ferr" id="quota-cap-err" aria-live="polite"></div>
+      <div class="ferr" id="quota-form-err" aria-live="polite"></div>
+      <div class="btnrow">
+        <button type="submit" id="btn-quota">Quota update karo</button>
+      </div>
+    </form>
+    <div class="out" id="out-quota" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  $0 edition — OpenRouter free models • <span id="model"></span><br>
+  <span class="privacy">🔒 Privacy: aapke inputs OpenRouter ko bheje jate hain (aapki apni API key se) — sirf generation ke liye.</span>
+</footer>
+</div><!-- /app-view -->
+
+<!-- ============ v2 STUDIO SHELLS (Builder B / D mount targets) ============ -->
+<!-- EXACT contract: ye divs + neeche wale script/link tags. B/D inhi IDs par
+     window.CIOSMedia.mount(el) / window.CIOSAvatar.mount(el) karte hain. -->
+<div id="studio-media" hidden></div>
+<div id="studio-avatar" hidden></div>
+
+<!-- ============ PDF REPORT (print view; buildReport bharta hai) ============ -->
+<div id="report-print" aria-hidden="true"></div>
+
+<!-- ============ TOASTS ============ -->
+<div id="toast-stack" aria-live="polite"></div>
+
+<script src="/static/media-studio.js"></script>
+<script src="/static/avatar-studio.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

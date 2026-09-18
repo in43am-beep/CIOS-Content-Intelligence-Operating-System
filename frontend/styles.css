@@ -1,0 +1,149 @@
+*{box-sizing:border-box;margin:0;padding:0}
+/* ---- v2 type scale (§A1): clamp() responsive, floor 15px phone legibility ---- */
+:root{
+  --fs-meta: 12px;
+  --fs-sm:   clamp(13px, 0.8125rem + 0.20vw, 14px);   /* labels, buttons */
+  --fs-body: clamp(15px, 0.9375rem + 0.25vw, 17px);    /* .out long-form output */
+  --fs-h3:   clamp(17px, 1.0625rem + 0.40vw, 20px);
+  --fs-h2:   clamp(20px, 1.25rem   + 0.80vw, 26px);
+  --lh-body: 1.75;
+  --measure: 70ch;
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#0f1420;color:#e8ecf4;min-height:100vh;text-rendering:optimizeLegibility;letter-spacing:0}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;background:#161d2e;border-bottom:1px solid #2a3550;position:sticky;top:0;z-index:10}
+.brand{font-size:20px;font-weight:700}.brand span{font-size:13px;font-weight:400;color:#8fa0c2;margin-left:8px}
+.usage{font-size:13px;color:#8fa0c2;background:#0f1420;padding:6px 12px;border-radius:20px;border:1px solid #2a3550;cursor:pointer;font-family:inherit}
+.usage:hover{border-color:#3b82f6;color:#c6d2ea}
+.usage.warn{color:#fbbf24;border-color:#b45309;background:#2a1f08} /* >=80% amber warning */
+.headright{display:flex;gap:10px;align-items:center}
+.adminbadge{font-size:12px;color:#0f1420;background:#7dd3fc;padding:4px 10px;border-radius:12px;font-weight:700}
+.ghost{background:#1b2440 !important;color:#c6d2ea !important;border:1px solid #2a3550 !important;margin-top:14px}
+.ghost:hover{background:#243052 !important}
+.btnrow{display:flex;gap:10px;align-items:center}
+nav{display:flex;gap:8px;padding:12px 22px;background:#11182a;border-bottom:1px solid #2a3550;flex-wrap:wrap;position:sticky;top:57px;z-index:9}
+nav button{background:#1b2440;color:#c6d2ea;border:1px solid #2a3550;padding:9px 16px;border-radius:10px;cursor:pointer;font-size:14px}
+nav button:hover{background:#243052}
+nav button.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+main{max-width:860px;margin:0 auto;padding:26px 20px 60px}
+.tab{display:none}.tab.active{display:block;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+h2{margin-bottom:16px;font-size:var(--fs-h2);line-height:1.3}
+label{display:block;margin:12px 0;font-size:var(--fs-sm);line-height:1.5;color:#aebad6}
+input,textarea{width:100%;margin-top:6px;padding:11px 13px;border-radius:10px;border:1px solid #2a3550;background:#161d2e;color:#e8ecf4;font-size:15px;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#3b82f6}
+main button{background:#3b82f6;color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:15px;line-height:1.5;font-weight:600;cursor:pointer;margin-top:14px}
+main button:hover{background:#2563eb}
+main button:active{transform:translateY(1px)}
+main button:disabled{opacity:.55;cursor:not-allowed}
+/* keyboard a11y (§A2) */
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #7dd3fc;outline-offset:2px}
+.out{margin-top:20px;background:#161d2e;border:1px solid #2a3550;border-radius:12px;padding:18px;min-height:60px;white-space:pre-wrap;line-height:var(--lh-body);font-size:var(--fs-body);overflow-wrap:break-word}
+.out a,.out code{overflow-wrap:anywhere} /* URLs/code kabhi overflow na karein; no hyphenation */
+.out:empty{display:none}
+.out .k{color:#7dd3fc;font-weight:600}
+.out ul{margin:6px 0 12px 20px;white-space:normal}
+.out li{margin-bottom:6px}
+.err{color:#f87171}
+.meta{font-size:var(--fs-meta);line-height:1.5;color:#8fa0c2;margin-bottom:10px}
+.hist{border-bottom:1px solid #2a3550;padding:12px 0;white-space:normal}
+.hist b{color:#7dd3fc}
+footer{text-align:center;padding:18px;color:#5b6b8c;font-size:12.5px;border-top:1px solid #2a3550}
+/* H-1 fix: loading state ab real text node se render hota hai (JS textContent set karta hai) — ::after ki zaroorat nahi, .out:empty conflict khatam. */
+.loading{color:#8fa0c2;font-style:italic}
+
+/* ---- auth view ---- */
+.authwrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.authcard{width:100%;max-width:400px;background:#161d2e;border:1px solid #2a3550;border-radius:16px;padding:32px 28px}
+.authcard h1{text-align:center;font-size:28px}
+.authcard .sub{text-align:center;color:#8fa0c2;font-size:13px;margin:6px 0 20px}
+.authtabs{display:flex;gap:8px;margin-bottom:18px}
+.authtabs button{flex:1;background:#1b2440;color:#c6d2ea;border:1px solid #2a3550;padding:10px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
+.authtabs button.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+.authcard button[type=submit]{width:100%}
+.note{font-size:13px;color:#8fa0c2;margin:12px 0;line-height:1.5}
+.note b{color:#7dd3fc}
+
+/* ---- inline field errors (alert() ki jagah) ---- */
+.ferr{color:#f87171;font-size:13px;line-height:1.5;margin:4px 0 0;min-height:0}
+.ferr:not(:empty){margin-bottom:8px}
+
+/* ---- missing-key setup box ---- */
+.setupbox{background:#2a1f08;border:1px solid #b45309;color:#fcd34d;border-radius:12px;padding:16px 18px;margin-bottom:22px;line-height:1.8;font-size:14px}
+.setupbox a{color:#7dd3fc}
+.setupbox code{background:#0f1420;padding:2px 8px;border-radius:6px;font-size:13px}
+
+/* ---- admin ---- */
+h3{margin:26px 0 6px;font-size:var(--fs-h3);color:#c6d2ea}
+.admintable{width:100%;border-collapse:collapse;font-size:13px;white-space:normal;margin-top:6px}
+.admintable th,.admintable td{border:1px solid #2a3550;padding:8px 10px;text-align:left;word-break:break-word}
+.admintable th{background:#1b2440;color:#7dd3fc;font-weight:600}
+.okmsg{color:#4ade80}
+
+/* ---- footer privacy ---- */
+.privacy{color:#8fa0c2}
+
+/* ---- cancel button spacing ---- */
+.btnrow .ghost{margin-top:14px}
+
+/* ================= v2: responsive type rules (§A1) ================= */
+/* Phone (<480px): horizontal-scroll nav, wrap button rows, full-width output */
+@media (max-width: 479px){
+  main{padding:16px 12px}
+  .out{padding:14px;line-height:1.7;max-width:none}
+  nav{overflow-x:auto;flex-wrap:nowrap}
+  nav button{flex:0 0 auto}
+  .btnrow{flex-wrap:wrap}
+  .authcard{padding:24px 18px}
+}
+/* Desktop (≥1024px): output 17px cap + 70ch measure, centered */
+@media (min-width: 1024px){
+  .out{font-size:17px;max-width:var(--measure)}
+}
+
+/* ================= v2: toast system (§A3) ================= */
+#toast-stack{position:fixed;bottom:18px;right:18px;z-index:100;display:flex;
+  flex-direction:column;gap:10px;max-width:min(360px,calc(100vw - 36px))}
+.toast{border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;
+  color:#e8ecf4;background:#1b2440;border:1px solid #2a3550;cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);animation:fade .18s}
+.toast-error{background:#3a1420;border-color:#b91c1c}
+.toast-warn{background:#2a1f08;border-color:#b45309}
+.toast-success{background:#0b2e1c;border-color:#15803d}
+.toast-info{background:#0e1f3a;border-color:#1d4ed8}
+.toast .tmsg{white-space:pre-wrap;overflow-wrap:break-word}
+.toast .trid{margin-top:6px;font-size:11.5px;color:#9fb0d0}
+.toast .tretry{margin-top:8px;background:#3b82f6;color:#fff;border:none;
+  padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.toast .tretry:hover{background:#2563eb}
+@media (max-width: 479px){
+  #toast-stack{bottom:12px;right:12px;left:12px;max-width:none}
+}
+
+/* ================= v2: PDF report view (§A4) ================= */
+#report-print{display:none} /* screen par chhupa; print me @media print dikhata hai */
+.report{background:#fff;color:#000;max-width:100%}
+.rep-head h1{font-size:20pt;margin:0 0 12px;color:#000}
+.rep-meta{width:100%;border-collapse:collapse;font-size:11pt;margin-bottom:16px}
+.rep-meta th,.rep-meta td{border:1px solid #999;padding:6px 10px;text-align:left;vertical-align:top}
+.rep-meta th{background:#eee;color:#000;width:130px;font-weight:700}
+.rep-body{font-size:12pt;line-height:1.6;color:#000}
+.rep-body .k{color:#000;font-weight:700}
+.rep-body ul{margin:6px 0 12px 20px}
+.rep-body li{margin-bottom:6px}
+.rep-foot{margin-top:24px;padding-top:10px;border-top:1px solid #999;
+  font-size:10pt;color:#333}
+
+/* ================= v2: print (§A4) ================= */
+@media print{
+  @page{size:A4;margin:15mm}
+  body.printing > :not(#report-print){display:none !important}
+  #report-print{display:block !important}
+  .report{color:#000;background:#fff;font-size:12pt;line-height:1.6;max-width:none}
+  .rep-body > *{break-inside:avoid}
+  .rep-meta th{background:#eee !important;color:#000 !important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ---- studio shells: B/D apni styling khud laate hain; sirf layout ---- */
+#studio-media,#studio-avatar{padding:0}
+#studio-media[hidden],#studio-avatar[hidden]{display:none}

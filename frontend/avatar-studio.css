@@ -1,0 +1,110 @@
+/* Avatar Studio — HeyGen section styles (Builder D).
+ * Palette: app styles.css se match (dark navy). Is file ko edit nahi karna —
+ * styles.css A ka hai. Prefix: .av- (collision-free). */
+.av-wrap{max-width:860px;margin:0 auto}
+.av-wrap h2{margin:14px 0 16px;font-size:22px}
+/* Header row: title + ← Wapas (integration fix 2026-09-18) */
+.av-headrow{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.av-headrow h2{margin:14px 0 16px}
+.av-back{margin-top:0 !important;white-space:nowrap}
+
+/* Billing banner — hamesha sab se oopar, amber (paid disclosure) */
+.av-bill{background:#2a1f08;border:1px solid #b45309;color:#fcd34d;
+  border-radius:12px;padding:14px 18px;margin-bottom:14px;line-height:1.7;font-size:14px}
+
+/* LIVE badge — honest: sirf kaam karte controls par */
+.av-live{display:inline-block;font-size:11px;font-weight:700;color:#0f1420;
+  background:#4ade80;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+
+.av-block{margin-bottom:18px}
+.av-sec{background:#161d2e;border:1px solid #2a3550;border-radius:12px;padding:18px;margin-bottom:18px}
+.av-sec h3{margin:0 0 10px;font-size:17px;color:#c6d2ea}
+.av-note{font-size:13px;color:#8fa0c2;margin:10px 0;line-height:1.6}
+.av-note code{background:#0f1420;padding:2px 8px;border-radius:6px;font-size:12.5px}
+.av-hint{font-size:13px;color:#fbbf24;margin:8px 0;line-height:1.6}
+.av-muted{font-size:13.5px;color:#8fa0c2;margin:10px 0}
+.av-meta{font-size:12px;color:#8fa0c2}
+.av-count{font-size:12px;color:#8fa0c2;text-align:right;margin-top:2px}
+
+/* Key row */
+.av-keyrow-inner{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.av-keyok{font-size:14px;color:#4ade80}
+.av-keyform{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-top:6px}
+.av-keyform input{flex:1;min-width:220px;margin-top:0}
+.av-keyform button{margin-top:0}
+.av-dis{margin-top:0 !important}
+.av-danger-arm{background:#7f1d1d !important;border-color:#f87171 !important;color:#fff !important}
+
+/* Disabled sections (bina key): dikhte hain, dead nahi lagte */
+.av-disabled{opacity:.75}
+.av-disabled button:disabled{opacity:.55;cursor:not-allowed}
+
+/* Avatar grid */
+.av-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px}
+.av-card{background:#0f1420;border:2px solid #2a3550;border-radius:10px;overflow:hidden;
+  cursor:pointer;transition:border-color .15s}
+.av-card:hover{border-color:#3b82f6}
+.av-card.sel{border-color:#4ade80}
+.av-card img{width:100%;height:110px;object-fit:cover;display:block}
+.av-card .av-noimg{height:110px;display:flex;align-items:center;justify-content:center;font-size:34px}
+.av-card .av-name{padding:8px;font-size:12.5px;color:#c6d2ea;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Voice list */
+.av-voices{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.av-voice{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  background:#0f1420;border:1px solid #2a3550;border-radius:10px;padding:10px 12px}
+.av-voice.sel{border-color:#4ade80}
+.av-voice .av-vinfo{font-size:14px;color:#e8ecf4}
+.av-vacts{display:flex;gap:8px;align-items:center}
+.av-vacts button{margin-top:0;padding:8px 14px;font-size:13px}
+.av-pv{background:#1b2440 !important;color:#c6d2ea !important;border:1px solid #2a3550 !important}
+
+/* Create form */
+.av-form label{display:block;margin:12px 0 0;font-size:14px;color:#aebad6}
+.av-form select{width:100%;margin-top:6px;padding:11px 13px;border-radius:10px;
+  border:1px solid #2a3550;background:#161d2e;color:#e8ecf4;font-size:15px;font-family:inherit}
+.av-picks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.av-pick{font-size:13.5px;color:#7dd3fc;background:#0f1420;border:1px solid #2a3550;
+  border-radius:8px;padding:6px 12px}
+.av-pick i{color:#8fa0c2;font-style:normal}
+.av-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.av-check{display:flex !important;align-items:center;gap:8px;cursor:pointer}
+.av-check input{width:auto;margin-top:0}
+.av-form button[type=submit]{margin-top:16px}
+
+/* Progress + preview */
+.av-prog{margin-top:14px}
+.av-status{font-size:14px;color:#8fa0c2}
+.av-preview{margin-top:14px}
+.av-video{width:100%;max-height:420px;border-radius:12px;border:1px solid #2a3550;background:#000}
+.av-dl{display:inline-block;margin-top:10px;background:#1b2440;color:#7dd3fc;
+  border:1px solid #2a3550;padding:10px 18px;border-radius:10px;text-decoration:none;font-size:14px}
+.av-dl:hover{background:#243052}
+
+/* History */
+.av-hist{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.av-hrow{display:flex;gap:12px;align-items:center;background:#0f1420;
+  border:1px solid #2a3550;border-radius:10px;padding:10px 12px}
+.av-thumb{width:72px;height:48px;object-fit:cover;border-radius:6px;flex-shrink:0}
+.av-hrow .av-noimg{width:72px;height:48px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;background:#161d2e;border-radius:6px;flex-shrink:0}
+.av-hinfo{flex:1;font-size:13.5px;color:#e8ecf4;min-width:0}
+.av-hinfo b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.av-hacts{display:flex;gap:6px;align-items:center}
+.av-hacts button,.av-hacts .av-dl{margin-top:0;padding:7px 12px;font-size:13px}
+.av-del{color:#f87171 !important}
+
+/* Toast fallback colors (A ka #toast-stack na ho to) */
+.av-toast-error{background:#7f1d1d;color:#fff;border:1px solid #f87171;
+  border-radius:10px;padding:10px 14px;margin-top:8px;font-size:13.5px}
+.av-toast-success{background:#14532d;color:#fff;border:1px solid #4ade80;
+  border-radius:10px;padding:10px 14px;margin-top:8px;font-size:13.5px}
+.av-toast-info{background:#1e3a8a;color:#fff;border:1px solid #7dd3fc;
+  border-radius:10px;padding:10px 14px;margin-top:8px;font-size:13.5px}
+
+@media (max-width:480px){
+  .av-row2{grid-template-columns:1fr}
+  .av-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+  .av-hrow{flex-wrap:wrap}
+}
